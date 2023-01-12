@@ -21,37 +21,43 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   // Here we are creating the bool to use animation
-  bool isalign=false;
+  bool isupdate=false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: Container(
-        margin:const  EdgeInsets.all(30),
-        height: 400,
-      width: double.infinity,
-      color: Colors.blue,
-        // This is animated align used to align widget from one place to another
-        child:  AnimatedAlign(
-          // here we are defining the duration for how long it take perform animation
-          duration:  const  Duration(seconds: 1),
-          // here we are using curve there are different type of curve
-          curve: Curves.ease,
-          // whenever the the value change it shift its alignment  with animation
-          alignment:isalign?Alignment.topRight: Alignment.bottomLeft,
-          // This is the widget that is Alignment from one place to another
-          child:const  CircleAvatar(
-            backgroundColor: Colors.white,
 
-          ),
-        ),
+      body: Center(
+        // Here we are using the Animated Container so we can animate any property of container
+        // such as height, width, alignment, gradient,radius,color etc
+        child: AnimatedContainer(
+
+        margin:const  EdgeInsets.all(30),
+        height: isupdate ? 200:400,
+      width:isupdate?200: 400,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(isupdate?50:5git ),
+        gradient: LinearGradient(
+          colors:isupdate?[Colors.pinkAccent,Colors.purple]:
+           [Colors.blue,Colors.tealAccent]
+        )
+      ),
+
+        duration:const  Duration(seconds: 2),
+        alignment:isupdate?Alignment.center: Alignment.topRight,
+        child:const CircleAvatar(
+          backgroundColor: Colors.white,
+        )
+
+
+
       ),),
       floatingActionButton: FloatingActionButton(onPressed: () {
         // here we are changing the state as well as the value
         setState(() {
-          if(isalign){
-            isalign=false;
+          if(isupdate){
+            isupdate=false;
           }else{
-            isalign=true;
+            isupdate=true;
 
           }
 
