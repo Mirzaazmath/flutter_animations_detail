@@ -1,3 +1,8 @@
+Flutter AnimatedDefaultTextStyle
+
+
+<img src ="https://github.com/Mirzaazmath/flutter_animations_detail/blob/AnimatedDefaultTextstyle/assets/result.gif" height ="400">
+
 Flutter Animation 
 There are two type of animation in flutter 
 they are as follows
