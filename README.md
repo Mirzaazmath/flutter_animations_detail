@@ -1,4 +1,11 @@
 Flutter Animation 
+
+
+
+
+<img src ="https://github.com/Mirzaazmath/flutter_animations_detail/blob/rippleAnimation/assets/result.gif" height="400">
+
+
 There are two type of animation in flutter 
 they are as follows
 1. Drawing based
