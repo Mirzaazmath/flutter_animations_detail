@@ -1,58 +1,71 @@
 import 'package:flutter/material.dart';
 void main(){
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: HomePage(),
+    return MaterialApp(
+      home: Homepage(),
     );
   }
 }
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class Homepage extends StatefulWidget {
+  const Homepage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<Homepage> createState() => _HomepageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  // Here we are creating the bool to use animation
-  bool _update=false;
+class _HomepageState extends State<Homepage> with SingleTickerProviderStateMixin {
+  late AnimationController _controller=AnimationController(vsync: this,duration: const Duration(seconds: 4),lowerBound: 0.3)..repeat();
+
+List<double>radiuslist=[200.0,250.0,300,0,350.0];
+
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
-
+      // backgroundColor: Colors.black,
       body: Center(
-        /*
+        child: AnimatedBuilder(
 
-        * */
-        child:AnimatedDefaultTextStyle(
-          style: TextStyle(
-            fontSize:_update?30: 100,
-              fontWeight:_update?FontWeight.w300: FontWeight.bold,
-              color:_update?Colors.red :Colors.blue),
-        duration: Duration(seconds: 2),
-        child: Text("Flutter "),) ),
-      floatingActionButton: FloatingActionButton(onPressed: () {
-        // here we are changing the state as well as the value
-        setState(() {
-          if(_update){
-            _update=false;
-          }else{
-            _update=true;
 
-          }
+          animation: _controller,
+          builder: (BuildContext context, Widget? child) {
 
-        });
+            return  Stack(
+              alignment: Alignment.center,
+              children: radiuslist.map((radius)=>
+                  Container(
+                    height: radius*_controller.value,
+                    width: radius*_controller.value,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                     // gradient: LinearGradient(colors: [Colors.pink.withOpacity(1.0-_controller.value+0.2),Colors.indigo.withOpacity(1.0-_controller.value+0.2)])
 
-      },
-        child: const Icon(Icons.play_circle),
+                       color: Colors.blue.withOpacity(1.0-_controller.value+0.2),
 
+                    ),
+                  )
+
+              ).toList(),
+            );
+
+          },
+
+        ),
       ),
     );
   }
 }
+
